@@ -10,7 +10,7 @@
             '+7'||replace(substr(c.phone,3), '-','') phone ,
             c."e-mail",
             trunc(1.14 * cos(c.id) * sin(ac.id * 0.2) * cos(ac.id / 1.2)*1000000) trans_amount
-            from acnt_contract ac,
+            from acnt_contract2 ac,
             clients  c
             where
             ac.client_id  = c.id

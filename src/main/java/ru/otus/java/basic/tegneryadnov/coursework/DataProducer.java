@@ -1,5 +1,8 @@
 package ru.otus.java.basic.tegneryadnov.coursework;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -7,11 +10,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- *  Класс для запуска потоков с параллельными запросами к БД.
- *  Количество запущенных запросов определяется параметром из настроек threadsCount
- *  Результаты работы каждого запроса в потоке построчно выгружается в очередь сообщений rowsQueue
- *  После окончания работы всех запросов в очередь посылается сообщение "отравленная пилюля" poisonPill -
- *  сигнал читателю очереди окончить работу
+ * Класс для запуска потоков с параллельными запросами к БД.
+ * Количество запущенных запросов определяется параметром из настроек threadsCount
+ * Результаты работы каждого запроса в потоке построчно выгружается в очередь сообщений rowsQueue
+ * После окончания работы всех запросов в очередь посылается сообщение "отравленная пилюля" poisonPill -
+ * сигнал читателю очереди окончить работу
  */
 public class DataProducer {
     private final AppSettings appSettings;
@@ -23,6 +26,7 @@ public class DataProducer {
     private final String SQL;
     private final int THREADS_COUNT;
     private final String WITH_HEADER;
+    private static final Logger logger = LogManager.getLogger(DataProducer.class.getName());
 
     public DataProducer(BlockingQueue<String> rowsQueue, AppSettings appSettings) {
         this.rowsQueue = rowsQueue;
@@ -39,12 +43,14 @@ public class DataProducer {
         try {
             rowsQueue.put(POISON_PILL);
         } catch (InterruptedException e) {
+            logger.error(String.format("Ошибка отправки POISON_PILL %s", e));
             throw new RuntimeException(e);
         }
     }
 
     /**
      * Сформировать шапку csv файла
+     *
      * @param rsmd ResultSetMetaData записи
      * @return возвращает строку из колонок с разделителем
      * @throws SQLException
@@ -80,12 +86,12 @@ public class DataProducer {
                 try {
                     services.awaitTermination(30, TimeUnit.MINUTES);
                 } catch (InterruptedException e) {
-                    //logger.error("Ошибка закрытия пула потоков " + e);
+                    logger.error("Ошибка закрытия пула потоков вычислений" + e);
                     throw new RuntimeException(e);
                 } finally {
                     sendCommandStopConsumer();
                 }
-                //logger.info("Программа завершена");
+                logger.info("Потоки запросов завершены");
             }
         }
     }
@@ -94,11 +100,13 @@ public class DataProducer {
      * Запускает параллельный запрос, параметром которого является номер потока threadNumber - 1
      * Выполняет построчную обработку результата запроса, с заливкой в очередь сообщений
      * При необходимости формирует шапку отчета
+     *
      * @param threadNumber номер потока
      */
     private void uploadDataIntoQueue(int threadNumber) {
         try (Connection connection = DBCPDataSource.getConnection(appSettings);
              PreparedStatement ps = connection.prepareStatement(SQL);) {
+            int recordCounter = 0;
             ps.setInt(1, THREADS_COUNT);
             ps.setInt(2, threadNumber - 1);
             try (ResultSet resultSet = ps.executeQuery();) {
@@ -113,9 +121,12 @@ public class DataProducer {
                         processHeader(resultSetMetaData);
                     }
                     processRow(resultSetMetaData, stringBuilder, resultSet);
+                    recordCounter++;
                 }
+                logger.info(String.format("Потоком %d залито записей: %d",threadNumber, recordCounter));
             }
         } catch (SQLException e) {
+            logger.error(String.format("Ошибка SQL запроса в uploadDataIntoQueue(%d): %s", threadNumber, e));
             throw new RuntimeException(e);
         }
     }
@@ -123,9 +134,10 @@ public class DataProducer {
     /**
      * Получает запись результата запроса, формирует строку с разделителем COLUMN_SEPARATOR
      * Выгружает строку в очередь сообщений
+     *
      * @param rsmd ResultSetMetaData записи
-     * @param sb StringBuilder
-     * @param rs ResultSet
+     * @param sb   StringBuilder
+     * @param rs   ResultSet
      * @throws SQLException
      */
     private void processRow(ResultSetMetaData rsmd, StringBuilder sb, ResultSet rs) throws SQLException {
@@ -136,6 +148,7 @@ public class DataProducer {
         try {
             rowsQueue.put(sb.toString());
         } catch (InterruptedException e) {
+            logger.error(String.format("Ошибка отправки строки в очередь: %s", e));
             throw new RuntimeException(e);
         }
     }
@@ -143,6 +156,7 @@ public class DataProducer {
     /**
      * Получает ResultSetMetaData записи результата запроса, выставляет флаг проверки обработки шапки отчета headerChecked
      * Если проверки не было и требуется шапка отчета WITH_HEADER == true, получает шапку, заливает в очередь
+     *
      * @param rsmd ResultSetMetaData
      * @throws SQLException
      */
@@ -155,6 +169,7 @@ public class DataProducer {
             try {
                 rowsQueue.put(header);
             } catch (InterruptedException e) {
+                logger.error(String.format("Ошибка отправки заголовка в очередь: %s", e));
                 throw new RuntimeException(e);
             }
         }

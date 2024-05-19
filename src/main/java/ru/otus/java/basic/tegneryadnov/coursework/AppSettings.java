@@ -1,5 +1,7 @@
 package ru.otus.java.basic.tegneryadnov.coursework;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -16,7 +18,7 @@ import java.util.Map;
 
 /**
  * Класс чтения и хранения настроек программы.
- * Источник настроек определяется типом SettingsType
+ * Источник загрузки настроек определяется типом SettingsType
  * Реализована загрузка параметров из XML файла
  */
 public class AppSettings implements ReLoadable {
@@ -25,6 +27,7 @@ public class AppSettings implements ReLoadable {
     private static AppSettings appSettings;
     private final String fileName;
     private final SettingsType settingsSourceType;
+    private static final Logger logger = LogManager.getLogger(AppSettings.class.getName());
 
     private AppSettings(SettingsType settingsSourceType, String fileName) {
         this.fileName = fileName;
@@ -41,7 +44,8 @@ public class AppSettings implements ReLoadable {
 
     /**
      * Метод чтения текстового значения параметра key
-     * @param key имя параметра
+     *
+     * @param key   имя параметра
      * @param deflt значение по умолчанию
      * @return значение параметра
      */
@@ -56,6 +60,7 @@ public class AppSettings implements ReLoadable {
 
     /**
      * Метод чтения целочисленного значения параметра key
+     *
      * @param key имя параметра
      * @return значение параметра
      */
@@ -70,7 +75,8 @@ public class AppSettings implements ReLoadable {
 
     /**
      * Запись в хранилище текстовой пары ключ-значение параметра
-     * @param key имя параметра
+     *
+     * @param key  имя параметра
      * @param data значение параметра
      */
     public static void putString(String key, String data) {
@@ -83,6 +89,7 @@ public class AppSettings implements ReLoadable {
 
     /**
      * Загрузка параметров в хранилище из XML файла
+     *
      * @param fileName имя файла
      * @throws ParserConfigurationException
      * @throws IOException
@@ -130,15 +137,19 @@ public class AppSettings implements ReLoadable {
                 try {
                     loadFromXML(fileName);
                 } catch (ParserConfigurationException e) {
+                    logger.error("Ошибка загрузки настроек программы" + e);
                     throw new RuntimeException(e);
                 } catch (IOException e) {
+                    logger.error(String.format("Ошибка чтения файла загрузки настроек программы: %s %s", fileName, e));
                     throw new RuntimeException(e);
                 } catch (SAXException e) {
+                    logger.error(e);
                     throw new RuntimeException(e);
                 }
         }
         putString("login", (String) System.getProperties().getOrDefault("login", "defautlLogin"));
         putString("password", (String) System.getProperties().getOrDefault("password", "defautlPassword"));
         putString("poisonPill", "POISON_PILL");
+        logger.info(String.format("Настройки загружены из файла: %s", fileName));
     }
 }

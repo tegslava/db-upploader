@@ -1,0 +1,113 @@
+INFO  2024-05-20 01:07:49 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:07:49 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:07:51 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито в очередь: 25000
+INFO  2024-05-20 01:07:51 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито в очередь: 25000
+INFO  2024-05-20 01:07:51 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито в очередь: 25000
+INFO  2024-05-20 01:07:51 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито в очередь: 25000
+INFO  2024-05-20 01:07:51 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:07:52 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:45) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:07:52 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:07:52 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгружено 100001 записей
+INFO  2024-05-20 01:09:25 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:09:25 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:09:26 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 25000
+INFO  2024-05-20 01:09:26 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 25000
+INFO  2024-05-20 01:09:27 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 25000
+INFO  2024-05-20 01:09:27 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 25000
+INFO  2024-05-20 01:09:27 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:09:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:45) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:09:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:09:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгружено 100001 записей
+INFO  2024-05-20 01:12:25 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:12:25 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:12:26 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 25000
+INFO  2024-05-20 01:12:26 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 25000
+INFO  2024-05-20 01:12:26 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 25000
+INFO  2024-05-20 01:12:26 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 25000
+INFO  2024-05-20 01:12:26 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:12:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:45) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:12:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:12:27 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгружено записей: 100001
+INFO  2024-05-20 01:15:01 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:15:01 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:15:02 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 25000
+INFO  2024-05-20 01:15:03 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 25000
+INFO  2024-05-20 01:15:03 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 25000
+INFO  2024-05-20 01:15:03 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 25000
+INFO  2024-05-20 01:15:03 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:15:03 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:46) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:15:03 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:15:03 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:50) - Выгружено записей: 100001
+INFO  2024-05-20 01:28:51 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:28:51 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:28:52 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 25000
+INFO  2024-05-20 01:28:52 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 25000
+INFO  2024-05-20 01:28:52 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 25000
+INFO  2024-05-20 01:28:53 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 25000
+INFO  2024-05-20 01:28:53 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:28:53 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:28:53 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:28:53 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+DEBUG 2024-05-20 01:28:53 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 4
+INFO  2024-05-20 01:29:40 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:29:40 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:29:42 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 100000
+INFO  2024-05-20 01:29:42 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:29:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:29:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:29:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+DEBUG 2024-05-20 01:29:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 4
+INFO  2024-05-20 01:30:27 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:30:27 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:30:28 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 100000
+INFO  2024-05-20 01:30:28 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:30:29 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:30:29 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:30:29 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+INFO  2024-05-20 01:31:07 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:31:07 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:31:09 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 50000
+INFO  2024-05-20 01:31:09 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 50000
+INFO  2024-05-20 01:31:09 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:31:09 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:31:09 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:31:09 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+INFO  2024-05-20 01:31:40 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:31:40 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:31:41 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 50000
+INFO  2024-05-20 01:31:41 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 50000
+INFO  2024-05-20 01:31:41 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:31:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:31:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:31:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+DEBUG 2024-05-20 01:31:42 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 5
+INFO  2024-05-20 01:32:23 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:32:23 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:32:24 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 25000
+INFO  2024-05-20 01:32:24 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 25000
+INFO  2024-05-20 01:32:24 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 25000
+INFO  2024-05-20 01:32:24 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 25000
+INFO  2024-05-20 01:32:24 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:32:25 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:32:25 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:32:25 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 100001
+DEBUG 2024-05-20 01:32:25 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 4
+INFO  2024-05-20 01:38:15 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:38:15 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:38:21 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 500000
+INFO  2024-05-20 01:38:21 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:38:22 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:38:22 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:38:22 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 500001
+DEBUG 2024-05-20 01:38:22 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 10
+INFO  2024-05-20 01:38:50 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:153) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 01:38:50 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:35) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 01:38:56 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 2 залито записей: 125000
+INFO  2024-05-20 01:38:57 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 1 залито записей: 125000
+INFO  2024-05-20 01:38:58 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 4 залито записей: 125000
+INFO  2024-05-20 01:38:58 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:126) - Потоком 3 залито записей: 125000
+INFO  2024-05-20 01:38:58 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:94) - Потоки запросов завершены
+INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:48) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Выгружено записей: 500001
+DEBUG 2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Время работы программы: 11
