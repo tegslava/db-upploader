@@ -1,15 +1,16 @@
 package ru.otus.java.basic.tegneryadnov.coursework;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class MainApp {
-    private static final BlockingQueue<String> rowsQueue = new LinkedBlockingQueue<>(100);
-    private static final ExecutorService services = Executors.newFixedThreadPool(Config.BOUND);
+    //private static final AppSettings settingsP = AppSettings.getInstance(SettingsType.XML_FILE, "db-upploader.properties.xml");
+    //private static final BlockingQueue<String> rowsQueue = new LinkedBlockingQueue<>(settingsP.getInt("queueCapacity"));
+
     public static void main(String[] args) {
-        new Thread(new Consumer(rowsQueue, Config.poisonPill)).start();
-        (new DataProducer(rowsQueue, services)).execute();
+        AppSettings settings = AppSettings.getInstance(SettingsType.XML_FILE, "db-upploader.properties.xml");
+        BlockingQueue<String> rowsQueue = new LinkedBlockingQueue<>(settings.getInt("queueCapacity"));
+        new Thread(new Consumer(rowsQueue, settings)).start();
+        (new DataProducer(rowsQueue, settings)).execute();
     }
 }

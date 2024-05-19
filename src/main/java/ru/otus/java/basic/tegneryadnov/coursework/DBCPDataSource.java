@@ -6,21 +6,30 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBCPDataSource {
-    
-    private static BasicDataSource ds = new BasicDataSource();
 
-    static {
-        ds.setUrl(Config.url);
-        ds.setUsername(Config.login);
-        ds.setPassword(Config.password);
+    private static final BasicDataSource ds = new BasicDataSource();
+    private static DBCPDataSource dBCPDataSource;
+    private final AppSettings appSettings;
+
+    public static DBCPDataSource getInstance(AppSettings appSettings) {
+        if (dBCPDataSource == null) {
+            dBCPDataSource = new DBCPDataSource(appSettings);
+        }
+        return dBCPDataSource;
+    }
+
+    private DBCPDataSource(AppSettings appSettings) {
+        this.appSettings = appSettings;
+        ds.setUrl(appSettings.getString("url", "jdbc:postgresql://localhost:5432/db_tests"));
+        ds.setUsername(appSettings.getString("login", "unknownLogin"));
+        ds.setPassword(appSettings.getString("password", "unknownPassword"));
         ds.setMinIdle(5);
         ds.setMaxIdle(10);
-        ds.setMaxOpenPreparedStatements(Config.BOUND);
+        ds.setMaxOpenPreparedStatements(appSettings.getInt("threadsCount"));
     }
-    
-    public static Connection getConnection() throws SQLException {
+
+    public static Connection getConnection(AppSettings appSettings) throws SQLException {
+        getInstance(appSettings);
         return ds.getConnection();
     }
-    
-    private DBCPDataSource(){ }
 }

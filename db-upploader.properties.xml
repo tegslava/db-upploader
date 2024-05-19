@@ -1,0 +1,17 @@
+<?xml version = '1.0'?>
+<app-settings>
+    <properties>
+        <property key="url">jdbc:postgresql://localhost:5432/db_tests</property>
+        <property key="sql">SELECT * FROM public.answers
+                                ORDER BY id ASC LIMIT 100</property>
+        <property key="reportFileName">report.csv</property>
+        <property key="reportFormat">csv</property>
+        <property key="reportCharSetName">windows-1251</property>
+        <!--property key="reportCharSetName">UTF-8</property-->
+        <property key="reportWithHeader">Y</property>
+        <property key="reportColumnSeparator">;</property>
+        <property key="threadsCount">7</property>
+        <!--property key="poisonPill">STOP</property-->
+        <property key="queueCapacity">100</property>
+    </properties>
+</app-settings>
