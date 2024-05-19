@@ -6,19 +6,25 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Класс читателя из очереди сообщений
+ * Пока в очереди не появится сообщение POISON_PILL, в потоке опрашивает очередь на предмет новых записей.
+ * Открывает файл отчета на запись и построчно заполняет сообщениями из очереди
+ */
 public class Consumer implements Runnable {
     private final BlockingQueue<String> queue;
     private final String POISON_PILL;
     private final BufferedWriter bufferedWriter;
     private final String CHARSET_NAME;
+    private final String REPORT_FILE_NAME;
 
     public Consumer(BlockingQueue<String> queue, AppSettings appSettings) {
         this.queue = queue;
         POISON_PILL = appSettings.getString("poisonPill", "unknownPoisonPill");
         CHARSET_NAME = appSettings.getString("reportCharSetName", "UTF-8");
+        REPORT_FILE_NAME = appSettings.getString("reportFileName", "report.csv");
         try {
-            bufferedWriter = new BufferedWriter(new FileWriter(appSettings.getString("reportFileName", "report.csv"),
-                    Charset.forName(CHARSET_NAME)));
+            bufferedWriter = new BufferedWriter(new FileWriter(REPORT_FILE_NAME, Charset.forName(CHARSET_NAME)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

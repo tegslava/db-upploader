@@ -6,6 +6,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *  Класс для запуска потоков с параллельными запросами к БД.
+ *  Количество запущенных запросов определяется параметром из настроек threadsCount
+ *  Результаты работы каждого запроса в потоке построчно выгружается в очередь сообщений rowsQueue
+ *  После окончания работы всех запросов в очередь посылается сообщение "отравленная пилюля" poisonPill -
+ *  сигнал читателю очереди окончить работу
+ */
 public class DataProducer {
     private final AppSettings appSettings;
     private final BlockingQueue<String> rowsQueue;
@@ -22,9 +29,9 @@ public class DataProducer {
         this.appSettings = appSettings;
         POISON_PILL = appSettings.getString("poisonPill", "unknownPoisonPill");
         COLUMN_SEPARATOR = appSettings.getString("reportColumnSeparator", ";");
-        SQL = appSettings.getString("sql","");
+        SQL = appSettings.getString("sql", "");
         THREADS_COUNT = appSettings.getInt("threadsCount");
-        WITH_HEADER = appSettings.getString("reportWithHeader","Y");
+        WITH_HEADER = appSettings.getString("reportWithHeader", "Y");
         services = Executors.newFixedThreadPool(THREADS_COUNT);
     }
 
@@ -36,6 +43,12 @@ public class DataProducer {
         }
     }
 
+    /**
+     * Сформировать шапку csv файла
+     * @param rsmd ResultSetMetaData записи
+     * @return возвращает строку из колонок с разделителем
+     * @throws SQLException
+     */
     private String getHeader(ResultSetMetaData rsmd) throws SQLException {
         if (rsmd == null) {
             return "";
@@ -48,29 +61,17 @@ public class DataProducer {
         return stringBuilder.toString();
     }
 
+    /**
+     * Метод запускает потоки с параллельными запросами к БД.
+     * Количество запущенных запросов определяется параметром из настроек THREADS_COUNT
+     * Результаты работы запроса построчно выгружается в очередь сообщений rowsQueue
+     */
     public void execute() {
         try {
             for (int i = 1; i <= THREADS_COUNT; i++) {
+                int threadNumber = i;
                 services.execute(() -> {
-                    try (Connection connection = DBCPDataSource.getConnection(appSettings);
-                         Statement statement = connection.createStatement()) {
-                        try (ResultSet resultSet = statement.executeQuery(SQL)) {
-                            StringBuilder stringBuilder = new StringBuilder();
-                            ResultSetMetaData resultSetMetaData = null;
-                            while (resultSet.next()) {
-                                stringBuilder.setLength(0);
-                                if (resultSetMetaData == null) {
-                                    resultSetMetaData = resultSet.getMetaData();
-                                }
-                                if (!headerChecked) {
-                                    processHeader(resultSetMetaData);
-                                }
-                                processRow(resultSetMetaData, stringBuilder, resultSet);
-                            }
-                        }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    uploadDataIntoQueue(threadNumber);
                 });
             }
         } finally {
@@ -89,6 +90,44 @@ public class DataProducer {
         }
     }
 
+    /**
+     * Запускает параллельный запрос, параметром которого является номер потока threadNumber - 1
+     * Выполняет построчную обработку результата запроса, с заливкой в очередь сообщений
+     * При необходимости формирует шапку отчета
+     * @param threadNumber номер потока
+     */
+    private void uploadDataIntoQueue(int threadNumber) {
+        try (Connection connection = DBCPDataSource.getConnection(appSettings);
+             PreparedStatement ps = connection.prepareStatement(SQL);) {
+            ps.setInt(1, THREADS_COUNT);
+            ps.setInt(2, threadNumber - 1);
+            try (ResultSet resultSet = ps.executeQuery();) {
+                StringBuilder stringBuilder = new StringBuilder();
+                ResultSetMetaData resultSetMetaData = null;
+                while (resultSet.next()) {
+                    stringBuilder.setLength(0);
+                    if (resultSetMetaData == null) {
+                        resultSetMetaData = resultSet.getMetaData();
+                    }
+                    if (!headerChecked) {
+                        processHeader(resultSetMetaData);
+                    }
+                    processRow(resultSetMetaData, stringBuilder, resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Получает запись результата запроса, формирует строку с разделителем COLUMN_SEPARATOR
+     * Выгружает строку в очередь сообщений
+     * @param rsmd ResultSetMetaData записи
+     * @param sb StringBuilder
+     * @param rs ResultSet
+     * @throws SQLException
+     */
     private void processRow(ResultSetMetaData rsmd, StringBuilder sb, ResultSet rs) throws SQLException {
         for (int i = 1; i <= rsmd.getColumnCount(); i++) {
             sb.append(rs.getString(i))
@@ -101,6 +140,12 @@ public class DataProducer {
         }
     }
 
+    /**
+     * Получает ResultSetMetaData записи результата запроса, выставляет флаг проверки обработки шапки отчета headerChecked
+     * Если проверки не было и требуется шапка отчета WITH_HEADER == true, получает шапку, заливает в очередь
+     * @param rsmd ResultSetMetaData
+     * @throws SQLException
+     */
     private synchronized void processHeader(ResultSetMetaData rsmd) throws SQLException {
         if (headerChecked) {
             return;

@@ -5,6 +5,9 @@ import org.apache.commons.dbcp.BasicDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Класс-пул соединений
+ */
 public class DBCPDataSource {
 
     private static final BasicDataSource ds = new BasicDataSource();
@@ -28,6 +31,12 @@ public class DBCPDataSource {
         ds.setMaxOpenPreparedStatements(appSettings.getInt("threadsCount"));
     }
 
+    /**
+     * Метод получения нового соединения к БД
+     * @param appSettings настройки программы
+     * @return соединение типа java.sql.Connection
+     * @throws SQLException
+     */
     public static Connection getConnection(AppSettings appSettings) throws SQLException {
         getInstance(appSettings);
         return ds.getConnection();

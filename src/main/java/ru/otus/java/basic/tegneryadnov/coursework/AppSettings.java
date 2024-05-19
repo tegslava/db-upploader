@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс чтения и хранения настроек программы.
+ * Источник настроек определяется типом SettingsType
+ * Реализована загрузка параметров из XML файла
+ */
 public class AppSettings implements ReLoadable {
 
     private static final Map<String, String> hashMap = new HashMap<>();
@@ -21,7 +26,7 @@ public class AppSettings implements ReLoadable {
     private final String fileName;
     private final SettingsType settingsSourceType;
 
-    public AppSettings(SettingsType settingsSourceType, String fileName) {
+    private AppSettings(SettingsType settingsSourceType, String fileName) {
         this.fileName = fileName;
         this.settingsSourceType = settingsSourceType;
         load();
@@ -34,6 +39,12 @@ public class AppSettings implements ReLoadable {
         return appSettings;
     }
 
+    /**
+     * Метод чтения текстового значения параметра key
+     * @param key имя параметра
+     * @param deflt значение по умолчанию
+     * @return значение параметра
+     */
     public static String getString(String key, String deflt) {
         String value = hashMap.get(key);
         if (value == null) {
@@ -43,6 +54,11 @@ public class AppSettings implements ReLoadable {
         }
     }
 
+    /**
+     * Метод чтения целочисленного значения параметра key
+     * @param key имя параметра
+     * @return значение параметра
+     */
     public static int getInt(String key) {
         try {
             int value = Integer.parseInt(hashMap.get(key));
@@ -52,6 +68,11 @@ public class AppSettings implements ReLoadable {
         }
     }
 
+    /**
+     * Запись в хранилище текстовой пары ключ-значение параметра
+     * @param key имя параметра
+     * @param data значение параметра
+     */
     public static void putString(String key, String data) {
         if (data == null) {
             throw new IllegalArgumentException();
@@ -60,6 +81,13 @@ public class AppSettings implements ReLoadable {
         }
     }
 
+    /**
+     * Загрузка параметров в хранилище из XML файла
+     * @param fileName имя файла
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public static void loadFromXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -87,6 +115,10 @@ public class AppSettings implements ReLoadable {
         }
     }
 
+    /**
+     * Загрузка параметров программы из источника в хранилище. Тип источника определяется settingsSourceType.
+     * Дополнительно, для обеспечения безопасности, из строки запуска забираем логин и пароль подключения к БД
+     */
     @Override
     public void load() {
         switch (settingsSourceType) {
@@ -107,6 +139,6 @@ public class AppSettings implements ReLoadable {
         }
         putString("login", (String) System.getProperties().getOrDefault("login", "defautlLogin"));
         putString("password", (String) System.getProperties().getOrDefault("password", "defautlPassword"));
-        putString("poisonPill", (String) System.getProperties().getOrDefault("POISON_PILL", "POISON_PILL"));
+        putString("poisonPill", "POISON_PILL");
     }
 }
