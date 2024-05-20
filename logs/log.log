@@ -111,3 +111,25 @@ INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.
 INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Р’С‹РіСЂСѓР·РєР° РІ С„Р°Р№Р» report.csv Р·Р°РІРµСЂС€РµРЅР°.
 INFO  2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:52) - Р’С‹РіСЂСѓР¶РµРЅРѕ Р·Р°РїРёСЃРµР№: 500001
 DEBUG 2024-05-20 01:38:59 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:53) - Р’СЂРµРјСЏ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹: 11
+INFO  2024-05-20 11:48:18 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:149) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 11:48:19 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+ERROR 2024-05-20 11:48:19 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:127) - Ошибка SQL запроса в uploadDataIntoQueue(1): org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.)
+ERROR 2024-05-20 11:48:19 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:127) - Ошибка SQL запроса в uploadDataIntoQueue(2): org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.)
+ERROR 2024-05-20 11:48:19 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:127) - Ошибка SQL запроса в uploadDataIntoQueue(4): org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.)
+ERROR 2024-05-20 11:48:19 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:127) - Ошибка SQL запроса в uploadDataIntoQueue(3): org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.)
+INFO  2024-05-20 11:48:19 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:92) - Потоки запросов завершены
+INFO  2024-05-20 11:48:19 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:46) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 11:48:19 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 11:48:19 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:50) - Выгружено записей: 0
+DEBUG 2024-05-20 11:48:19 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Время работы программы: 2
+INFO  2024-05-20 11:51:24 [main] ru.otus.java.basic.tegneryadnov.coursework.AppSettings (AppSettings.java:149) - Настройки загружены из файла: db-upploader.properties.xml
+INFO  2024-05-20 11:51:24 [main] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:33) - Старт выгрузки в файл отчета: report.csv
+INFO  2024-05-20 11:51:31 [pool-2-thread-2] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:124) - Потоком 2 залито записей: 125000
+INFO  2024-05-20 11:51:31 [pool-2-thread-3] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:124) - Потоком 3 залито записей: 125000
+INFO  2024-05-20 11:51:32 [pool-2-thread-4] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:124) - Потоком 4 залито записей: 125000
+INFO  2024-05-20 11:51:32 [pool-2-thread-1] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:124) - Потоком 1 залито записей: 125000
+INFO  2024-05-20 11:51:32 [main] ru.otus.java.basic.tegneryadnov.coursework.DataProducer (DataProducer.java:92) - Потоки запросов завершены
+INFO  2024-05-20 11:51:32 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:46) - Поступила команда: закончить чтение из очереди
+INFO  2024-05-20 11:51:32 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:49) - Выгрузка в файл report.csv завершена.
+INFO  2024-05-20 11:51:32 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:50) - Выгружено записей: 500001
+DEBUG 2024-05-20 11:51:32 [Thread-0] ru.otus.java.basic.tegneryadnov.coursework.Consumer (Consumer.java:51) - Время работы программы: 9

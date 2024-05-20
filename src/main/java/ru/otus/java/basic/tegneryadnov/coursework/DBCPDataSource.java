@@ -12,17 +12,8 @@ public class DBCPDataSource {
 
     private static final BasicDataSource ds = new BasicDataSource();
     private static DBCPDataSource dBCPDataSource;
-    private final AppSettings appSettings;
-
-    public static DBCPDataSource getInstance(AppSettings appSettings) {
-        if (dBCPDataSource == null) {
-            dBCPDataSource = new DBCPDataSource(appSettings);
-        }
-        return dBCPDataSource;
-    }
 
     private DBCPDataSource(AppSettings appSettings) {
-        this.appSettings = appSettings;
         ds.setUrl(appSettings.getString("url", "jdbc:postgresql://localhost:5432/db_tests"));
         ds.setUsername(appSettings.getString("login", "unknownLogin"));
         ds.setPassword(appSettings.getString("password", "unknownPassword"));
@@ -34,11 +25,13 @@ public class DBCPDataSource {
     /**
      * Метод получения нового соединения к БД
      * @param appSettings настройки программы
-     * @return соединение типа java.sql.Connection
-     * @throws SQLException
+     * @return возвращает соединение типа java.sql.Connection
+     * @throws SQLException проблемы с открытием соединения
      */
     public static Connection getConnection(AppSettings appSettings) throws SQLException {
-        getInstance(appSettings);
+        if (dBCPDataSource == null) {
+            dBCPDataSource = new DBCPDataSource(appSettings);
+        }
         return ds.getConnection();
     }
 }

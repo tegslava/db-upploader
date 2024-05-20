@@ -66,8 +66,7 @@ public class AppSettings implements ReLoadable {
      */
     public static int getInt(String key) {
         try {
-            int value = Integer.parseInt(hashMap.get(key));
-            return value;
+            return Integer.parseInt(hashMap.get(key));
         } catch (NumberFormatException e) {
             throw new RuntimeException(String.format("Ошибочный параметр для \"%s\"", key));
         }
@@ -91,9 +90,9 @@ public class AppSettings implements ReLoadable {
      * Загрузка параметров в хранилище из XML файла
      *
      * @param fileName имя файла
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws SAXException
+     * @throws ParserConfigurationException проблемы с парсингом XML
+     * @throws IOException                  проблемы с открытием файла XML
+     * @throws SAXException                 проблемы с парсингом XML
      */
     public static void loadFromXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -109,11 +108,9 @@ public class AppSettings implements ReLoadable {
                     if (attributes != null) {
                         Node n = attributes.getNamedItem("key");
                         NodeList childs = propertyList.item(j).getChildNodes();
-                        if (childs != null) {
-                            for (int k = 0; k < childs.getLength(); k++) {
-                                if (childs.item(k).getNodeType() == Node.TEXT_NODE) {
-                                    putString(n.getNodeValue(), childs.item(k).getNodeValue());
-                                }
+                        for (int k = 0; k < childs.getLength(); k++) {
+                            if (childs.item(k).getNodeType() == Node.TEXT_NODE) {
+                                putString(n.getNodeValue(), childs.item(k).getNodeValue());
                             }
                         }
                     }
@@ -130,14 +127,13 @@ public class AppSettings implements ReLoadable {
     public void load() {
         switch (settingsSourceType) {
             case PROPERTIES: {
-                ;
             }
             break;
             default:
                 try {
                     loadFromXML(fileName);
                 } catch (ParserConfigurationException e) {
-                    logger.error("Ошибка загрузки настроек программы" + e);
+                    logger.error(String.format("Ошибка загрузки настроек программы %s", e));
                     throw new RuntimeException(e);
                 } catch (IOException e) {
                     logger.error(String.format("Ошибка чтения файла загрузки настроек программы: %s %s", fileName, e));

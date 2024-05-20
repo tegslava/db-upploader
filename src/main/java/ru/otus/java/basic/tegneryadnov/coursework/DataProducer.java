@@ -53,7 +53,7 @@ public class DataProducer {
      *
      * @param rsmd ResultSetMetaData записи
      * @return возвращает строку из колонок с разделителем
-     * @throws SQLException
+     * @throws SQLException проблемы с разбором струткуры ResultSetMetaData
      */
     private String getHeader(ResultSetMetaData rsmd) throws SQLException {
         if (rsmd == null) {
@@ -76,9 +76,7 @@ public class DataProducer {
         try {
             for (int i = 1; i <= THREADS_COUNT; i++) {
                 int threadNumber = i;
-                services.execute(() -> {
-                    uploadDataIntoQueue(threadNumber);
-                });
+                services.execute(() -> uploadDataIntoQueue(threadNumber));
             }
         } finally {
             if (services != null) {
@@ -86,8 +84,8 @@ public class DataProducer {
                 try {
                     services.awaitTermination(30, TimeUnit.MINUTES);
                 } catch (InterruptedException e) {
-                    logger.error("Ошибка закрытия пула потоков вычислений" + e);
-                    throw new RuntimeException(e);
+                    logger.error(String.format("Ошибка закрытия пула потоков вычислений: %s", e));
+                    //throw new RuntimeException(e);
                 } finally {
                     sendCommandStopConsumer();
                 }
@@ -105,11 +103,11 @@ public class DataProducer {
      */
     private void uploadDataIntoQueue(int threadNumber) {
         try (Connection connection = DBCPDataSource.getConnection(appSettings);
-             PreparedStatement ps = connection.prepareStatement(SQL);) {
+             PreparedStatement ps = connection.prepareStatement(SQL)) {
             int recordCounter = 0;
             ps.setInt(1, THREADS_COUNT);
             ps.setInt(2, threadNumber - 1);
-            try (ResultSet resultSet = ps.executeQuery();) {
+            try (ResultSet resultSet = ps.executeQuery()) {
                 StringBuilder stringBuilder = new StringBuilder();
                 ResultSetMetaData resultSetMetaData = null;
                 while (resultSet.next()) {
@@ -123,7 +121,7 @@ public class DataProducer {
                     processRow(resultSetMetaData, stringBuilder, resultSet);
                     recordCounter++;
                 }
-                logger.info(String.format("Потоком %d залито записей: %d",threadNumber, recordCounter));
+                logger.info(String.format("Потоком %d залито записей: %d", threadNumber, recordCounter));
             }
         } catch (SQLException e) {
             logger.error(String.format("Ошибка SQL запроса в uploadDataIntoQueue(%d): %s", threadNumber, e));
@@ -132,13 +130,13 @@ public class DataProducer {
     }
 
     /**
-     * Получает запись результата запроса, формирует строку с разделителем COLUMN_SEPARATOR
+     * Получает запись результата запроса, формирует строку с разделителем COLUMN_SEPARATOR.
      * Выгружает строку в очередь сообщений
      *
      * @param rsmd ResultSetMetaData записи
      * @param sb   StringBuilder
      * @param rs   ResultSet
-     * @throws SQLException
+     * @throws SQLException проблемы с разбором струткуры ResultSetMetaData
      */
     private void processRow(ResultSetMetaData rsmd, StringBuilder sb, ResultSet rs) throws SQLException {
         for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -158,7 +156,7 @@ public class DataProducer {
      * Если проверки не было и требуется шапка отчета WITH_HEADER == true, получает шапку, заливает в очередь
      *
      * @param rsmd ResultSetMetaData
-     * @throws SQLException
+     * @throws SQLException проблемы с разбором струткуры ResultSetMetaData
      */
     private synchronized void processHeader(ResultSetMetaData rsmd) throws SQLException {
         if (headerChecked) {
